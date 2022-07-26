@@ -1,9 +1,9 @@
-let Connection = require('../model/connection');
 const {combine} = require("qs/lib/utils");
 const qs = require('qs');
 const fs = require('fs');
 const { rejects } = require('assert');
 const { resolve } = require('path');
+const Connection = require("./connection");
 
 class User {
     

@@ -2,14 +2,15 @@ const http = require('http');
 const fs = require('fs');
 const url = require('url')
 const qs = require('qs');
+const UserController = require('./controller/user-controller');
 // const LoginController = require('./controller/login-controller.js')
-const UserController = require('../Web_trua_nay_an_gi/controller/user-controller')
 
 const mimeTypes = {
     "html": "text/html",
     "js": "text/javascript",
     "min.js": "text/javascript",
     "css": "text/css",
+    "css.map": "text/css",
     "min.css": "text/css",
     "jpg": "image/jpg",
     "png": "image/png",
@@ -28,7 +29,7 @@ let server = http.createServer((req, res) => {
     let urlPart = urlParse.pathname;
     let method = req.method;
 
-    let filesDefences = req.url.match(/\.js|.css|.jpg|.png|.gif|min.js|min.css/);
+    let filesDefences = req.url.match(/\.js|.css|.css.map|.jpg|.png|.gif|min.js|min.css|.woff|.ttf|.woff2|.eot/);
     if (filesDefences) {
         let filePath = filesDefences[0].toString();
         let extension = mimeTypes[filesDefences[0].toString().split('.')[1]];
@@ -42,7 +43,6 @@ let server = http.createServer((req, res) => {
         }
         res.writeHead(200, { 'Content-Type': extension });
         fs.createReadStream(__dirname + '/template' + '/' + req.url).pipe(res);
-        console.log(extension)
     }
 
     switch (urlPart) {

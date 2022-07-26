@@ -1,11 +1,12 @@
-const User = require('../model/user');
 const qs = require('qs');
 const fs = require('fs');
 const {raw} = require("mysql");
+const User = require('../model/user');
 
 class UserController {
     constructor() {
-        this.user = new User();
+        this.us
+        er = new User();
     }
     //show form đăng nhập
     showLoginForm (req, res) {

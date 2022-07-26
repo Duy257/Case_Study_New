@@ -34,25 +34,36 @@
                         <div class="row">
                             <div class="col-md-9 col-lg-8 mx-auto pl-5 pr-5">
                                 <h3 class="login-heading mb-4">Đăng ký thành viên nhận ngay ưu đãi!</h3>
-                                <form>
+                                <form method="POST">
                                     <div class="form-label-group">
-                                        <input type="email" id="inputEmail" class="form-control"
+                                        <input type="text" id="inputName" name="name" class="form-control"
+                                            placeholder="Name">
+                                        <label for="inputName">Tên</label>
+                                    </div>
+                                    <div class="form-label-group">
+                                        <input type="email" id="inputEmail" name="email" class="form-control"
                                             placeholder="Email address">
-                                        <label for="inputEmail">Email address / Mobile</label>
+                                        <label for="inputEmail">Email</label>
                                     </div>
                                     <div class="form-label-group">
-                                        <input type="password" id="inputPassword" class="form-control"
+                                        <input type="text" id="inputPhone" name="phone" class="form-control"
+                                            placeholder="Số điện thoại">
+                                        <label for="inputPhone">Số điện thoại</label>
+                                    </div>
+                                    <div class="form-label-group">
+                                        <input type="password" id="inputPassword" name="password" class="form-control"
                                             placeholder="Password">
-                                        <label for="inputPassword">Password</label>
+                                        <label for="inputPassword">Mật khẩu</label>
                                     </div>
-                                    <div class="form-label-group mb-4">
-                                        <input type="text" id="ptext" class="form-control" placeholder="Promocode">
-                                        <label for="ptext">Promocode</label>
+                                    <div class="form-label-group">
+                                        <input type="password" id="inputPassword" name="passwordConfirm" class="form-control"
+                                            placeholder="Password">
+                                        <label for="inputPassword">Nhập lại mật khẩu</label>
                                     </div>
-                                    <a href="index.html"
-                                        class="btn btn-lg btn-outline-primary btn-block btn-login text-uppercase font-weight-bold mb-2">Đăng nhập</a>
+                                    <button type="submit"
+                                        class="btn btn-lg btn-outline-primary btn-block btn-login text-uppercase font-weight-bold mb-2">Đăng ký</button>
                                     <div class="text-center pt-3">
-                                        Bạn đã có tài khoản? <a class="font-weight-bold" href="login.html">Đăng nhập ngay</a>
+                                        Bạn đã có tài khoản? <a class="font-weight-bold" href="/login">Đăng nhập ngay</a>
                                     </div>
                                 </form>
                             </div>

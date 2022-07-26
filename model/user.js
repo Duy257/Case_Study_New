@@ -36,9 +36,26 @@ class User {
                                                                                 ('${user.name}', '${user.password}', '${user.email}', '${user.phone}');`
         this.connection.query(insertQuery, (err, data) => {
             if (err) {
-                console.log('create error: ' + err)
+                console.log('create error: ' + err);
             }else {
-                console.log('create success!')
+                console.log('create user success!');
+                console.log(data)
+                let selectId = `select id from users where email='${user.email}';`;
+                this.connection.query(selectId, (err, data)=>{
+                    if (err) {
+                        console.log('create error: ' + err)
+                    }else {
+                        console.log(data);
+                        let insertRole = `insert into role_user(idrole, iduser) values (2, '${data}')`
+                        this.connection.query(insertRole, (err, data) => {
+                        if(err){
+                            console.log(err);
+                        }else{
+                            console.log('Add role success!');
+                        }
+                        })
+                    }
+                })
             }
         })
     };

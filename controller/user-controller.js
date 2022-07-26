@@ -9,7 +9,7 @@ class UserController {
     }
     //show form đăng nhập
     showLoginForm (req, res) {
-        fs.readFile('template/home.html', 'utf-8', (err, data) => {
+        fs.readFile('template/login.html', 'utf-8', (err, data) => {
             if (err) {
                 console.log(err);
             }else {
@@ -83,7 +83,6 @@ class UserController {
                     };
                     if (success === true) {
                         this.user.createUser(user);
-                        this.user.createRole(user);
                         res.writeHead(301, {
                             location: '/resister'
                         });

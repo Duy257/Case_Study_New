@@ -2,14 +2,17 @@ const http = require('http');
 const fs = require('fs');
 const url = require('url')
 const qs = require('qs');
+const UserController = require('./controller/user-controller');
+const HomeController = require('./controller/home-controller');
 // const LoginController = require('./controller/login-controller.js')
-const UserController = require('../Web_trua_nay_an_gi/controller/user-controller')
+
 
 const mimeTypes = {
     "html": "text/html",
     "js": "text/javascript",
     "min.js": "text/javascript",
     "css": "text/css",
+    "css.map": "text/css",
     "min.css": "text/css",
     "jpg": "image/jpg",
     "png": "image/png",
@@ -21,14 +24,15 @@ const mimeTypes = {
 };
 
 // let loginController = new LoginController();
-let usercontroller = new UserController();
+let userController = new UserController();
+let homeController = new HomeController();
 
 let server = http.createServer((req, res) => {
     let urlParse = url.parse(req.url);
     let urlPart = urlParse.pathname;
     let method = req.method;
 
-    let filesDefences = req.url.match(/\.js|.css|.jpg|.png|.gif|min.js|min.css/);
+    let filesDefences = req.url.match(/\.js|.css|.css.map|.jpg|.png|.gif|min.js|min.css|.woff|.ttf|.woff2|.eot/);
     if (filesDefences) {
         let filePath = filesDefences[0].toString();
         let extension = mimeTypes[filesDefences[0].toString().split('.')[1]];
@@ -42,26 +46,31 @@ let server = http.createServer((req, res) => {
         }
         res.writeHead(200, { 'Content-Type': extension });
         fs.createReadStream(__dirname + '/template' + '/' + req.url).pipe(res);
-        console.log(extension)
-    }
+        
+    }else{
 
     switch (urlPart) {
         case '/' :
             if(method == 'GET'){
-                usercontroller.showLoginForm(req, res);
-            }else {
-                usercontroller.login(req, res);
+                homeController.showHomePage(req, res);
             }
             break;
-        case '/resister':
+        case '/login' :
+            if(method == 'GET'){
+                userController.showLoginForm(req, res);
+            }else {
+                userController.login(req, res);
+            }
+            break;
+        case '/register':
             if (method == 'GET'){
-                usercontroller.showResisterForm(req, res);
+                userController.showResisterForm(req, res);
 
             }else {
-                usercontroller.createUser(req, res);
+                userController.createUser(req, res);
             }
             break;
-    }
+    }};
 });
 
 server.listen(8080, () => {

@@ -2,7 +2,7 @@ const http = require('http');
 const fs = require('fs');
 const url = require('url')
 const qs = require('qs');
-const UserController = require('./controller/user-controller');
+const UserController = require('./controller/admin/user-controller');
 const HomeController = require('./controller/home-controller');
 // const LoginController = require('./controller/login-controller.js')
 

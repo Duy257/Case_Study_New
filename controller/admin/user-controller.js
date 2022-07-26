@@ -1,4 +1,4 @@
-const User = require('../model/user');
+const User = require('../../model/user');
 const qs = require('qs');
 const fs = require('fs');
 const {raw} = require("mysql");

@@ -5,8 +5,7 @@ const User = require('../model/user');
 
 class UserController {
     constructor() {
-        this.us
-        er = new User();
+        this.user = new User();
     }
     //show form đăng nhập
     showLoginForm (req, res) {

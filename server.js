@@ -3,6 +3,7 @@ const fs = require('fs');
 const url = require('url')
 const qs = require('qs');
 const UserController = require('./controller/user-controller');
+const CategoryController = require('./controller/admin_controller/category-controller');
 // const LoginController = require('./controller/login-controller.js')
 
 const mimeTypes = {
@@ -23,7 +24,7 @@ const mimeTypes = {
 
 // let loginController = new LoginController();
 let usercontroller = new UserController();
-
+let categoryController = new CategoryController();
 let server = http.createServer((req, res) => {
     let urlParse = url.parse(req.url);
     let urlPart = urlParse.pathname;
@@ -46,21 +47,54 @@ let server = http.createServer((req, res) => {
     }
 
     switch (urlPart) {
-        case '/' :
-            if(method == 'GET'){
-                usercontroller.showLoginForm(req, res);
-            }else {
-                usercontroller.login(req, res);
-            }
-            break;
-        case '/resister':
-            if (method == 'GET'){
-                usercontroller.showResisterForm(req, res);
+        // case '/' :
+        //     if(method == 'GET'){
+        //         usercontroller.showLoginForm(req, res);
+        //     }else {
+        //         usercontroller.login(req, res);
+        //     }
+        //     break;
+        // case '/resister':
+        //     if (method == 'GET'){
+        //         usercontroller.showResisterForm(req, res);
 
-            }else {
-                usercontroller.createUser(req, res);
+        //     }else {
+        //         usercontroller.createUser(req, res);
+        //     }
+        //     break;
+        case '/':
+            if(method == 'GET'){
+                categoryController.showCategory(req, res);
+            }
+            
+            break;
+        case '/createcategory':{
+            if(method == 'GET'){
+                categoryController.showFormCreateCategory(req, res);
+            }else{
+                categoryController.createCategory(req, res);
             }
             break;
+        }
+        // case '/donecategory':{
+        //     categoryController.showCategory(req, res);
+        //     break;
+        // }
+        case '/editcategory':{
+            let query = qs.parse(urlParse.query);
+            let idUpdate = query.id;
+            if(method == 'GET'){
+                categoryController.showFormEditCategory(req, res, idUpdate);
+            }
+            else{
+                categoryController.editCategory(req, res, idUpdate);
+            }
+            break;
+        }
+        // case '/deletecategory':{
+            
+        //     break;
+        // }
     }
 });
 

@@ -23,15 +23,24 @@ class Category{
             });
         });
     }
-
+    getCategoryById(idUpdate){
+        return new Promise((resolve, rejects) => {
+            this.connection.query(`select * from category where id = ${idUpdate};`, (err, data) => {
+                if(err){
+                    rejects(err);
+                } else {
+                    resolve(data);
+                }
+            });
+        });
+    }
     createCategory(category){
-        let insertQuery = `insert into products(name, type, image) 
-        values('${category.name}', ${category.type}')`;
+        let insertQuery = `insert into category (name, type, image) values('${category.name}', '${category.type}','${category.image}')`;
         this.connection.query(insertQuery, (err, data) => {
             if(err){
                 console.log(err);
             }else{
-                console.log('Insert Succes!');
+                console.log('Insert Success!');
             }
         });        
     }
@@ -70,6 +79,19 @@ class Category{
             }else{
                 console.log('Update success');
             }
+        })
+    }
+
+    deleteCategory(id){
+        return new Promise((rejects, resolve) => {
+            let deleteQuery = `delete from category where id=${id}`
+            this.connection.query(deleteQuery, (err, data) => {
+                if(err){
+                    rejects(err);
+                } else {
+                    resolve('Remove success!');
+                }
+            })
         })
     }
 };
